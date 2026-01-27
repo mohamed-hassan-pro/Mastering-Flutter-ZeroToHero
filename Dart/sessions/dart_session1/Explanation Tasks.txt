@@ -1,0 +1,24 @@
+
+1. Explain the purpose of the main function in Dart.
+    The main function is the entry point of every Dart application
+    It is the first function that gets executed when you run the program
+    Without a main function, the program doesn't know where to start
+
+------------------------------------------------------------------------------------------
+
+2. Describe the difference between var, dynamic, and explicitly typed variables in Dart.
+
+  Explicitly Typed:
+    The type of the variable is explicitly declared (e.g. int, String, bool)
+    The type cannot change after assignment
+
+  Var:
+    It is a keyword to declare variables
+    If you assign a value immediately, Dart infers the type and it becomes fixed
+    However, if you declare a var without an initial value
+    it allows assigning values of different types later (similar to dynamic)
+
+  Dynamic:
+    We use dynamic when we do not know the data type at compile time.
+    It is essential when handling data coming from external sources like APIs
+    JSON files, or large datasets where the type might vary

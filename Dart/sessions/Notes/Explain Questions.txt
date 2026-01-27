@@ -1,0 +1,9 @@
+session 1
+1-Explain the purpose of the main function in Dart.
+2-Describe the difference between var, dynamic, and explicitly typed variables in Dart.
+---------------------------------------------
+session 2
+1-What is the role of the main function in a Dart program, and when does it run?
+2-Explain the differences between var, dynamic, and specific types like int/double/num/String.
+Provide a short example.
+3-Compare List, Set, and Map: what they store, basic operations, and a simple use case for each.
