@@ -58,9 +58,10 @@ Diploma/
 ├── Dart/
 │   ├── 📂 sessions/          # Code written during live lectures
 │   │   ├── dart_session1/    # Env Setup, Variables, Data Types & Operators
-│   │   ├── dart_session2/    # Logic Control (If/Else, Switch) & Null Safety
-│   │   ├── dart_session3/    # Loops (For, While, Do-While) & Iterations
-│   │   ├── dart_session4/    # Collections (Lists, Sets, Maps) & Dot Operator
+│   │   ├── dart_session2/    # Collections (Lists, Sets, Maps) & Dot Operator
+│   │   ├── dart_session3/    # Logic Control (If/Else, Switch) & Null Safety
+│   │   ├── dart_session4/    # Loops (For, While, Do-While) & Iterations
+│   │   ├── dart_session5/    # Functions: Basic Syntax, Return Statements, Parameters (Optional & Named)
 │   │   └── Notes/            # Summary & Theoretical notes
 │   │
 │   └── 📂 homework/          # My solutions to weekly assignments
