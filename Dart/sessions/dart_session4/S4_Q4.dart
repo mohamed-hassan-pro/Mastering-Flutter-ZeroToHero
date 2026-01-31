@@ -7,12 +7,11 @@ import 'dart:io';
 
 void main() {
   int? num;
-  print('Enter a number: ');
-  num = int.tryParse(stdin.readLineSync()!);
-  if (num != 0) {
-    do {
-      print('Enter a number: ');
-      num = int.tryParse(stdin.readLineSync()!);
-    } while (num != 0);
-  }
+  do {
+    print('Enter a number: ');
+    num = int.tryParse(stdin.readLineSync()!);
+    if (num != 0) {
+      break;
+    }
+  } while (num != 0);
 }
