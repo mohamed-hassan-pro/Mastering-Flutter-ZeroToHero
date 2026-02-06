@@ -9,15 +9,13 @@ void main() {
 }
 
 void isPrime(int n) {
-  for (int i = 2; i < n; i++) {
-    bool isPrime = true;
-    for (int j = 2; j < i; j++) {
-      if (i % j == 0) {
-        isPrime = false;
-      }
+  bool isPrime = true;
+  for (int j = 2; j < n; j++) {
+    if (n % j == 0) {
+      isPrime = false;
     }
-    if (isPrime) {
-      print(i);
-    }
+  }
+  if (isPrime) {
+    print(n);
   }
 }
