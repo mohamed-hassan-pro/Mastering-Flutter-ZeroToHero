@@ -11,7 +11,7 @@ void main() {
   
   print("Enter 5 numbers (between 1 and 10):");
   for (int i = 0; i < 5; i++) {
-    stdout.write("Number ${i + 1}: ");
+    print("Number ${i + 1}: ");
     int num = int.parse(stdin.readLineSync()!);
     inputs.add(num);
   }

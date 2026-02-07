@@ -4,7 +4,10 @@ defined.
 */
 
 void main() {
-  print("Class 'Car' is defined.");
+  Car car = Car();
+  if (car is Car) {
+    print("Class 'Car' is defined.");
+  }
 }
 
 class Car {}
