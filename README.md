@@ -62,12 +62,14 @@ Diploma/
 │   │   ├── dart_session3/    # Logic Control (If/Else, Switch) & Null Safety
 │   │   ├── dart_session4/    # Loops (For, While, Do-While) & Iterations
 │   │   ├── dart_session5/    # Functions: Basic Syntax, Return Statements, Parameters (Optional & Named)
+│   │   ├── dart_session6/    # OOP Intro: Concepts, Classes & Objects
+│   │   ├── dart_session7/    # Class Internals: Methods, Constructors & Attributes
 │   │   └── Notes/            # Summary & Theoretical notes
 │   │
 │   └── 📂 homework/          # My solutions to weekly assignments
 │       ├── dart_session1_homework/
 │       ├── dart_session2_homework/
 │       ├── dart_session3_homework/
-│       └── dart_session4_homework/
+│       └── ...
 │
 └── 🚧 More Technologies Loading...
