@@ -12,88 +12,98 @@ rule.
 which vehicles cannot complete the route under their own constraints (you define the constraint per
 type).
 */
-void main() {
-  Vehicle vehicle1 = Vehicle(fuelRate: 0.05, tankCapacity: 50);
-  Suv suv1 = Suv(fuelRate: 0.07, tankCapacity: 60, cargoWeight: 20);
-  Sport sport1 = Sport(fuelRate: 0.1, tankCapacity: 45, isTurboMode: true);
+class Vehicle {
+  double _tankCap = 0;
+  double _fuelRate = 0;
 
-  List<Vehicle> vehicles = [vehicle1, suv1, sport1];
+  Vehicle({
+    required double tankCap,
+    required double fuelRate,
+  }) {
+    if (tankCap > 0 && fuelRate > 0) {
+      this._tankCap = tankCap;
+      this._fuelRate = fuelRate;
+    } else {
+      print("Invalid vehicle data");
+    }
+  }
+
+  double calcFuel({required double distance}) => distance * _fuelRate;
+  bool canCompleteTrip(double distance) => calcFuel(distance: distance) <= _tankCap;
+}
+
+class Car extends Vehicle {
+  double _carWt = 0;
+  Car({required super.tankCap, required super.fuelRate,required double weight}){
+    if(weight > 0){
+      this._carWt = weight;
+    }else{
+      print("Invalid weight value");
+    }
+  }
+  @override
+  double calcFuel({required double distance}) {
+    return super.calcFuel(distance: distance) * (1 + _carWt / 1000);
+  }
+  @override
+  bool canCompleteTrip(double distance) => calcFuel(distance: distance) <= _tankCap;
+}
+
+class Truck extends Vehicle {
+  double _truckWt = 0;
+  double _cargoCap = 0;  //وزن الحمولة
+
+  Truck({required super.tankCap, required super.fuelRate,required double cargoCapacity}){
+    if(cargoCapacity > 0){
+      this._cargoCap = cargoCapacity;
+    }else{
+      print("Invalid cargo capacity value");
+    }
+  }
+  @override
+  double calcFuel({required double distance}) {
+    return super.calcFuel(distance: distance) * (1 + _cargoCap / 1000);
+  }
+  @override
+  bool canCompleteTrip(double distance) => calcFuel(distance: distance) <= _tankCap;
+}
+
+class Bus extends Vehicle {
+  double _busWt = 0;
+  double _paxCap = 0;  //سعة الركاب
+  Bus({required super.tankCap, required super.fuelRate,required double passengerCapacity}){
+    if(passengerCapacity > 0){
+      this._paxCap = passengerCapacity;
+    }else{
+      print("Invalid passenger capacity value");
+    }
+  }
+  @override
+  double calcFuel({required double distance}) {
+    return super.calcFuel(distance: distance) * (1 + _paxCap / 1000);
+  }
+  @override
+  bool canCompleteTrip(double distance) => calcFuel(distance: distance) <= _tankCap;
+}
+
+
+void main() {
+  List<Vehicle> vehicles = [
+    Car(tankCap: 50, fuelRate: 0.1, weight: 1500),
+    Truck(tankCap: 100, fuelRate: 0.2, cargoCapacity: 2000),
+    Bus(tankCap: 80, fuelRate: 0.15, passengerCapacity: 50)
+  ];
+
   List<double> distances = [100, 200, 300];
 
   for (Vehicle vehicle in vehicles) {
     double totalFuel = 0;
     for (double distance in distances) {
-      double fuel = vehicle.computeFuel(distance);
-      totalFuel += fuel;
+      totalFuel += vehicle.calcFuel(distance: distance);
     }
-    print("${vehicle.runtimeType} total fuel needed: $totalFuel");
-    if (totalFuel > (vehicle._tankCapacity ?? 0)) {
-      print("${vehicle.runtimeType} cannot complete the trip.");
+    print("Vehicle ${vehicle.runtimeType} total fuel needed: $totalFuel");
+    if (!vehicle.canCompleteTrip(distances.last)) {
+      print("Vehicle ${vehicle.runtimeType} cannot complete the last trip.");
     }
-  }
-}
-
-class Vehicle {
-  double? _fuelRate;
-  double? _tankCapacity;
-
-  Vehicle({double? fuelRate, double? tankCapacity}) {
-    if (fuelRate != null && fuelRate < 0) {
-      print("Error: Invalid fuel rate.");
-    } else {
-      _fuelRate = fuelRate;
-    }
-
-    if (tankCapacity != null && tankCapacity < 0) {
-      print("Error: Invalid tank capacity.");
-    } else {
-      _tankCapacity = tankCapacity;
-    }
-  }
-
-  double computeFuel(double distance) {
-    if (_fuelRate == null) return 0;
-    return distance * _fuelRate!;
-  }
-}
-
-class Suv extends Vehicle {
-  double? _cargoWeight;
-
-  Suv({double? fuelRate, double? tankCapacity, double? cargoWeight})
-    : super(fuelRate: fuelRate, tankCapacity: tankCapacity) {
-    if (cargoWeight != null && cargoWeight < 0) {
-      print("Error: Invalid cargo weight.");
-    } else {
-      _cargoWeight = cargoWeight;
-    }
-  }
-
-  @override
-  double computeFuel(double distance) {
-    double baseFuel = super.computeFuel(distance);
-    if (_cargoWeight != null && _cargoWeight! > 0) {
-      baseFuel += _cargoWeight! * 0.1; // Add extra fuel based on cargo weight
-    }
-    return baseFuel;
-  }
-}
-
-class Sport extends Vehicle {
-  bool? _isTurboMode;
-
-  Sport({double? fuelRate, double? tankCapacity, bool? isTurboMode})
-    : super(fuelRate: fuelRate, tankCapacity: tankCapacity) {
-    _isTurboMode = isTurboMode;
-  }
-
-  @override
-  double computeFuel(double distance) {
-    double baseFuel = super.computeFuel(distance);
-    if (_isTurboMode == true) {
-      baseFuel *=
-          1.5; // Turbo mode increases fuel consumption by a factor of 1.5
-    }
-    return baseFuel;
   }
 }
